@@ -3,14 +3,14 @@
  * 폼 데이터를 Supabase contacts 테이블에 저장
  */
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase";
+import { getSupabaseAdmin } from "@/lib/supabase";
 import type { ContactFormData } from "@/types/contact";
 
 export async function POST(request: Request) {
   try {
     const body: ContactFormData = await request.json();
 
-    const { error } = await supabaseAdmin.from("contacts").insert({
+    const { error } = await getSupabaseAdmin().from("contacts").insert({
       organization: body.organization,
       department: body.department ?? null,
       name: body.name,
